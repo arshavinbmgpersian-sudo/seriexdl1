@@ -1,0 +1,519 @@
+{% extends 'base.html' %}
+{% block title %}{{ series.title }}{% endblock %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block content %}
+    <!-- START: Main -->
+    <div class="container container-lg mt-4">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:home' %}">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'movie:series_list' %}">سریال ها</a></li>
+                        <li class="breadcrumb-item active">
+                            {{ series.title }}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- START: Post -->
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12" id="main-post">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-dark font-weight-bolder">{{ series.title }}</h5>
+                        <div class="d-md-flex d-sm-flex d-none">
+                            <a class="mx-1 text-dark">
+                                <i class="fas fa-th-large"></i>
+                            </a>
+                            {% for genre in series.genre.all %}
+                                <a href="{% url 'movie:genre_series' genre.slug %}" class="mx-1 text-dark">
+                                    {{ genre.title }}{% if not forloop.last %} - {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-12 col-12 card-cover">
+                                {% if series.thumbnail %}
+                                    <img class="w-100 h-100 rounded" src="{{ series.thumbnail.url }}"
+                                         alt="{{ series.title }}"/>
+                                {% else %}
+                                    <img class="w-100 h-100 rounded" src="{% static 'img/image_not_available.jpg' %}"
+                                         alt="{{ series.title }}"/>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-12 col-12 d-flex justify-content-between flex-column">
+                                <div class="card-detail post">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <a class="d-flex align-items-center">
+                                                <i class="far fa-star mr-1"></i>
+                                                <span class="text-dark">امتیاز : </span>
+                                                <span> {{ series.score }} </span>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            {% for lang in series.language.all %}
+                                                <a class="d-flex align-items-center">
+                                                    <i class="fas fa-headphones mr-1"></i>
+                                                    <span class="text-dark">زبان : </span>
+                                                    <span>{{ lang.name }}{% if not forloop.last %}، {% endif %}</span>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <a class="d-flex align-items-center">
+                                                <i class="far fa-globe mr-1"></i>
+                                                <span class="text-dark">کشور : </span>
+                                                <span> {{ series.country }} </span>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <a class="d-flex align-items-center">
+                                                <i class="far fa-exclamation-triangle mr-1"></i>
+                                                <span class="text-dark">رنج سنی : </span>
+                                                <span> {{ series.age_range }} </span>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <a class="d-flex align-items-center">
+                                                <i class="far fa-clock mr-1"></i>
+                                                <span class="text-dark">زمان : </span>
+                                                <span> {{ series.duration }} دقیقه </span>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <a class="d-flex align-items-center">
+                                                <i class="far fa-user mr-1"></i>
+                                                <span class="text-dark">کارگردان : </span>
+                                                <span> {{ series.director }} </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-about">
+                                    <span href="#">
+                                        <h6>خلاصه داستان :</h6>
+                                    </span>
+                                    <h6>{{ series.description }}</h6>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <hr/>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-12 mb-1">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            انتشار در تاریخ :
+                                        </span>
+                                        <span class="text-primary">{{ series.formatted_release_date }}</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-12 mb-1">
+                                        <span>
+                                            <i class="far fa-comment-alt-lines"></i>
+                                            تعداد نظرات :
+                                        </span>
+                                        <span class="text-primary">{{ series.series_comments.count }}</span>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12 mb-1">
+                                        <span>
+                                            <i class="far fa-eye"></i>
+                                            تعداد بازدید ها :
+                                        </span>
+                                        <span class="text-primary">{{ series.views }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="title text-dark font-weight-bolder">تریلر</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-trailer" id="trailer">
+                                    <video id="player" poster="
+
+                                            {% if series.series_images.all %}{{ series.series_images.first.images.url }}{% else %}{% static 'img/image_not_available_trailer.jpg' %}{% endif %}"
+                                           src="{{ series.trailer }}" controls></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-12">
+                        <div class="card main-screenshot-card">
+                            <div class="card-header">
+                                <h5 class="title text-dark font-weight-bolder">
+                                    اسکرین شات
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-screenshot" id="screenshots">
+                                    <div class="swiper-container swiper-container2">
+                                        <div class="swiper-wrapper">
+                                            {% for image in series.series_images.all %}
+                                                <div class="swiper-slide">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <img src="{{ image.images.url }}"
+                                                                 alt=""/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="watch-movie">
+                    <div class="card-header">
+                        <h5 class="title text-dark font-weight-bolder">دانلود</h5>
+                        {% if series.subtitle_url %}
+                            <div>
+                                <a href="{{ series.subtitle_url }}" class="btn btn-sm btn-outline-primary">
+                                    دانلود زیرنویس
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="accordion collapse-icon accordion-icon-rotate" id="accordionWrapa2"
+                                     data-toggle-hover="true">
+                                    {% for chapter in chapters %}
+                                        <div class="card collapse-header">
+                                            <div id="heading{{ forloop.counter }}" class="card-header collapsed"
+                                                 data-toggle="collapse" data-target="#accordion{{ forloop.counter }}"
+                                                 aria-expanded="false" role="tablist">
+                                                <span class="collapse-title">
+                                                    <i class="bx bx-cloud align-middle"></i>
+                                                    <span class="align-middle font-size-base">{{ chapter.title }}</span>
+                                                </span>
+                                            </div>
+                                            <div id="accordion{{ forloop.counter }}" role="tabpanel"
+                                                 data-parent="#accordionWrapa2"
+                                                 aria-labelledby="heading{{ forloop.counter }}" class="collapse"
+                                                 style="">
+                                                <div class="card-content">
+                                                    <div class="card-body line-height-2">
+                                                        <ul class="list-group">
+                                                            {% for video in chapter.videoseries_set.all %}
+                                                                <li class="list-group-item d-flex justify-content-between">
+                                                                    <span>قسمت {{ video.order }}</span>
+                                                                    <div>
+                                                                        {% if video.quality_480p %}
+                                                                            <a href="{{ video.quality_480p }}"
+                                                                               class="btn btn-primary btn-sm">کیفیت
+                                                                                480</a>
+                                                                        {% endif %}
+                                                                        {% if video.quality_720p %}
+                                                                            <a href="{{ video.quality_720p }}"
+                                                                               class="btn btn-primary btn-sm">کیفیت
+                                                                                720</a>
+                                                                        {% endif %}
+                                                                        {% if video.quality_1080p %}
+                                                                            <a href="{{ video.quality_1080p }}"
+                                                                               class="btn btn-primary btn-sm">کیفیت
+                                                                                1080</a>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="cast">
+                    <div class="card-header">
+                        <h5 class="title text-dark font-weight-bolder">بازیگران</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="swiper-container swiper-container3 swip">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                {% for actor in series.actors.all %}
+                                    <div class="swiper-slide card hover">
+                                        {% if actor.thumbnail %}
+                                            <img class="card-img-top" src="{{ actor.thumbnail.url }}" alt="{{ actor.name }}"/>
+                                        {% else %}
+                                            <img class="card-img-top" src="{% static 'img/image_not_available.jpg' %}" alt="{{ actor.name }}"/>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <div class="card-content">
+                                                <a href="{% url 'movie:actor_detail' actor.slug %}" class="card-link">
+                                                    <h5>{{ actor.name }}</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- If we need pagination -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="comments">
+                    <div class="card-header">
+                        <h5 class="title text-dark font-weight-bolder">دیدگاه</h5>
+                    </div>
+                    <div class="card-body" id="comments_container">
+                        <div class="row">
+                            {% for comment in series.series_comments.all %}
+                                <div class="col-md-12">
+                                    <div class="card bg-info-lighten card-comment">
+                                        <div class="card-header d-flex justify-content-between mb-0">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <h5 class="text-dark font-weight-bolder">{{ comment.author.username }}</h5>
+                                                <span class="card-subtitle text-primary ml-2">{{ comment.created_at|to_jalali:'%Y/%m/%d' }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0 pt-0">
+                                            <p>{{ comment.body }}</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-end mb-1 mr-2 add-emoji">
+                                            {% if request.user.is_authenticated and comment.author == request.user %}
+                                                <a href="{% url 'movie:delete_series_comment' comment.id %}" class="btn btn-outline-danger btn-sm mr-1">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <fieldset class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5" name="body" id="body" placeholder="دیدگاه خود را بنویسید" required></textarea>
+                                        </div>
+                                    </fieldset>
+                                    <div class="col-md-6">
+                                        <input class="btn btn-outline-primary" type="submit" value="ثبت دیدگاه"/>
+                                        <input class="btn btn-danger" type="reset" value="پاک کردن"/>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                            <a class="btn btn-danger" href="{% url 'accounts:login' %}">برای ارسال نظر ابتدا باید وارد
+                                شوید</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if series.similar_series.all %}
+                    <div class="card" id="recommended-movie">
+                        <div class="card-header">
+                            <h5 class="title text-dark font-weight-bolder">
+                                سریال های مشابه
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="swiper-container swiper-container4" style="overflow-y: visible;">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    {% for serial in series.similar_series.all %}
+                                        <div class="swiper-slide card">
+                                            {% if serial.thumbnail %}
+                                                <img class="card-img-top" src="{{ serial.thumbnail.url }}"
+                                                     alt="{{ serial.title }}"/>
+                                            {% else %}
+                                                <img class="card-img-top"
+                                                     src="{% static 'img/image_not_available.jpg' %}"
+                                                     alt="{{ serial.title }}"/>
+                                            {% endif %}
+                                            <div class="card-body pl-0 bg-transparent">
+                                                <a href="{% url 'movie:series_detail' serial.slug %}">
+                                                    <span>{{ serial.title }}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                    <div class="swiper-scrollbar"></div>
+                                </div>
+                                <!-- If we need pagination -->
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <!-- END: Post -->
+            </div>
+
+            <!-- START: Sidebar -->
+            {% include 'includes/movie_sidebar.html' %}
+            <!-- END: Sidebar -->
+
+            <!-- START:Theme option -->
+            <div class="shadow p-2 customizer" id="theme-option">
+                <div class="change-setting shadow cursor-pointer">
+                    <a href="#" class="font-medium-4">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                </div>
+                <header class="d-flex align-items-center justify-content-between">
+                    <h4 class="font-weight-normal">تنظیمات قالب</h4>
+                    <a class="text-dark font-medium-4 close" href="#">
+                        <i class="far fa-times"></i>
+                    </a>
+                </header>
+                <hr/>
+                <h5 class="mt-2">طرح قالب</h5>
+                <div class="d-flex align-items-center">
+                    <div class="mr-1">
+                        <fieldset>
+                            <div class="radio">
+                                <input
+                                        type="radio"
+                                        name="layoutOptions"
+                                        value="false"
+                                        id="radio-light"
+                                        class="layout-name"
+                                        theme="light"
+                                        checked=""
+                                />
+                                <label for="radio-light">روشن</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-1">
+                        <fieldset>
+                            <div class="radio">
+                                <input
+                                        type="radio"
+                                        name="layoutOptions"
+                                        value="false"
+                                        id="radio-dark"
+                                        class="layout-name"
+                                        theme="dark"
+                                />
+                                <label for="radio-dark">تیره</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <hr/>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mt-2">سایه کارت</h5>
+                    <div class="custom-control custom-switch">
+                        <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                id="card-shadow"
+                                checked
+                        />
+                        <label class="custom-control-label" for="card-shadow"></label>
+                    </div>
+                </div>
+                <hr/>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mt-2">اسکرول به بالا</h5>
+                    <div class="custom-control custom-switch">
+                        <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                id="scroll-top"
+                                name="scrollTopShow"
+                                checked
+                        />
+                        <label class="custom-control-label" for="scroll-top"></label>
+                    </div>
+                </div>
+                <hr/>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mt-2">تمام صفحه</h5>
+                    <div class="custom-control custom-switch">
+                        <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                id="fullscreen-option"
+                                name="fullscrenn"
+                        />
+                        <label
+                                class="custom-control-label"
+                                for="fullscreen-option"
+                        ></label>
+                    </div>
+                </div>
+                <hr/>
+                <h5 class="mt-2">نوع فوتر</h5>
+                <div class="d-flex align-items-center">
+                    <div class="mr-1">
+                        <fieldset>
+                            <div class="radio">
+                                <input
+                                        type="radio"
+                                        name="footer-option"
+                                        value="false"
+                                        class="footer-option"
+                                        footer="hidden"
+                                        id="hidden-footer"
+                                />
+                                <label for="hidden-footer">مخفی</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-1">
+                        <fieldset>
+                            <div class="radio">
+                                <input
+                                        type="radio"
+                                        name="footer-option"
+                                        value="true"
+                                        class="footer-option"
+                                        footer="static"
+                                        id="static-footer"
+                                        checked
+                                />
+                                <label for="static-footer">ایستا</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-1">
+                        <fieldset>
+                            <div class="radio">
+                                <input
+                                        type="radio"
+                                        name="footer-option"
+                                        value="false"
+                                        class="footer-option"
+                                        id="sticky-footer"
+                                        footer="sticky"
+                                />
+                                <label for="sticky-footer">چسبان</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- END:Theme option -->
+        </div>
+    </div>
+    <!-- END: Main -->
+{% endblock %}
