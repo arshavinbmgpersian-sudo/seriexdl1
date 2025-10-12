@@ -1,0 +1,14 @@
+{
+  "name": "PARSAFLIX",
+  "short_name": "PARSAFLIX",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "64x64"
+    }
+  ],
+  "theme_color": "#111111",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

@@ -1,0 +1,123 @@
+
+body { font-family: 'Arial', sans-serif;
+     margin: 0; 
+     padding: 0; 
+     line-height: 1.6;
+     background-color: #000B1F; 
+     color: #e0e0e0;
+     font-family:"iransans" ;
+     src: url(Fonts/IRANSansXBlack.ttf); 
+     src: url(Fonts/IRANSansXMedium.ttf); 
+     src: url(Fonts/IRANSansXLight.ttf);
+}
+@font-face {
+     font-family:"iransans" ;
+     src: url(Fonts/IRANSansXBlack.ttf); 
+     src: url(Fonts/IRANSansXMedium.ttf); 
+     src: url(Fonts/IRANSansXLight.ttf); 
+}
+@font-face {
+     font-family:"montserrat" ;
+     src: url(Fonts/Montserrat-Black.ttf); 
+     src: url(Fonts/Montserrat-Medium.ttf); 
+     src: url(Fonts/Montserrat-Light.ttf); 
+}
+.container { width: 90%;
+     margin:0 auto; }
+header {
+     color: #fff; 
+     padding: 1rem 0; 
+     text-align: center; } 
+header h1 { margin: 0; } 
+header nav ul { list-style: none;
+     padding: 0; 
+     margin: 0; }
+header nav ul li { display: inline; 
+    margin: 0 15px; } 
+header nav ul li a { color: #fff;
+     text-decoration: none; }
+header nav ul li a:hover { text-decoration: underline; } 
+.logo-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ 
+ .logo {
+     width: 230px;
+     height: auto;
+     margin-bottom: 5px;
+ }
+ 
+.banner { background: url('images/bannerWall-E.png') no-repeat center center/cover;
+     color: #fff;
+      text-align: center; 
+      padding: 5rem 0; } 
+.banner h2 { margin: 0;
+     font-size: 2.5rem; } 
+.banner p { font-size: 1.2rem;
+     margin: 1rem 0; }
+.movies { padding: 2rem 0;
+     text-align: center; } 
+.movies h2 { margin-bottom: 1rem; } 
+.movie-grid { display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     gap: 20px;
+.movie-card {
+          background: #102a43;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          overflow: hidden;
+          width: 300px;
+          text-align: center;
+          transition: transform 0.3s ease;
+        }
+        
+.movie-card:hover {
+          transform: scale(1.05);
+        }
+        
+.movie-card img {
+          width: 100%;
+          height: auto;
+        }
+        
+.movie-card h3 {
+          margin: 1rem 0;
+          font-size: 1.5rem;
+        }
+        
+.movie-card p {
+          padding: 0 1rem 1rem;
+          color: #666;
+}}
+.contact-info { 
+     background-color: #333;
+      padding: 40px 20px;
+       text-align: center; color: #fff;
+        border-top: 4px solid #00d4ff;
+      } 
+ .contact-info h3 { 
+     font-size: 20px;
+      margin-bottom: 20px;
+       color: #fff; 
+     } 
+ .social-media ul {
+      list-style: none;
+       padding: 0;
+      } 
+ .social-media ul li {
+      display: inline-block;
+       margin: 0 15px;
+      }
+ .social-icon {
+      width: 40px;
+       height: 40px;
+        transition: transform 0.3s ease;
+         filter: brightness(0) invert(1);
+  } 
+  .social-icon:hover { 
+     transform: scale(1.2);
+  }
+  
