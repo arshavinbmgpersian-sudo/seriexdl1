@@ -1,0 +1,75 @@
+{% load static %}
+{% load jalali_tags %}
+<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12" id="sidebar">
+    <div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-pills justify-content-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="base-pill31" data-toggle="pill" href="#pill31"
+                                           aria-expanded="true">
+                                            بروز شده ها
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="base-pill32" data-toggle="pill" href="#pill32"
+                                           aria-expanded="false">
+                                            پر بازدید ترین
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content shadow-none">
+                                    <div role="tabpanel" class="tab-pane active" id="pill31"> <!--بروز شده-->
+                                        {% for article in updated_articles %}
+                                            <a href="{% url 'blog:article_detail' article.slug %}">
+                                                <div class="d-flex border-bottom pb-1 mt-1">
+                                                    {% if article.thumbnail %}
+                                                        <img class="rounded mr-1" src="{{ article.thumbnail.url }}"
+                                                             height="70" width="70" alt="{{ article.title|truncatewords:6 }}"/>
+                                                    {% else %}
+                                                        <img class="rounded mr-1"
+                                                             src="{% static 'img/category_image_not_available.jpg' %}"
+                                                             height="70" width="70" alt="{{ article.title|truncatewords:6 }}"/>
+                                                    {% endif %}
+                                                    <div>
+                                                        <a href="{% url 'blog:article_detail' article.slug %}">
+                                                            <h6>{{ article.title|truncatewords:6 }}</h6>
+                                                        </a>
+                                                        <span class="font-size-small">{{ article.created_at|to_jalali:'%Y/%m/%d' }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="tab-pane" id="pill32">
+                                        {% for article in popular_articles %}
+                                            <a href="{% url 'blog:article_detail' article.slug %}">
+                                                <div class="d-flex border-bottom pb-1 mt-1">
+                                                    {% if article.thumbnail %}
+                                                        <img class="rounded mr-1" src="{{ article.thumbnail.url }}" height="70" width="70" alt="{{ article.title|truncatewords:6 }}"/>
+                                                    {% else %}
+                                                        <img class="rounded mr-1" src="{% static 'img/category_image_not_available.jpg' %}" height="70" width="70" alt="{{ article.title|truncatewords:6 }}"/>
+                                                    {% endif %}
+                                                    <div>
+                                                        <a href="{% url 'blog:article_detail' article.slug %}">
+                                                            <h6>{{ article.title|truncatewords:6 }}</h6>
+                                                        </a>
+                                                        <span class="font-size-small">{{ article.created_at|to_jalali:'%Y/%m/%d' }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
