@@ -1,0 +1,98 @@
+body { font-family: 'Arial', sans-serif;
+     background-color:  #000B1F;
+     color: #e0e0e0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 20px;
+     font-family:"iransans" ;
+     src: url(Fonts/IRANSansXBlack.ttf); 
+     src: url(Fonts/IRANSansXMedium.ttf); 
+     src: url(Fonts/IRANSansXLight.ttf);
+}
+@font-face {
+     font-family:"iransans" ;
+     src: url(Fonts/IRANSansXBlack.ttf); 
+     src: url(Fonts/IRANSansXMedium.ttf); 
+     src: url(Fonts/IRANSansXLight.ttf); 
+}
+@font-face {
+     font-family:"montserrat" ;
+     src: url(Fonts/Montserrat-Black.ttf); 
+     src: url(Fonts/Montserrat-Medium.ttf); 
+     src: url(Fonts/Montserrat-Light.ttf); 
+}
+* {
+     margin: 1;
+     padding: 0;
+     box-sizing: border-box;
+     direction: rtl;
+ }
+ .movie-poster {
+     margin-bottom: 20px;
+ }
+ 
+ .movie-poster img {
+     width: 500px;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+ }
+ 
+ .movie-details {
+     text-align: right;
+     margin-bottom: 20px;
+     width: 80%;
+     color: #ffffff;
+     background-color: #102a43;
+     padding: 20px;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+ }
+ 
+ .movie-details h2 {
+     font-size: 2rem;
+     margin-bottom: 10px;
+ }
+ 
+ .rating {
+     margin-bottom: 10px;
+     font-size: 1.2rem;
+ }
+ 
+ .rating .score {
+     color: #f4c542;
+     font-weight: bold;
+ }
+ 
+ .movie-description {
+     width: 80%;
+     margin-bottom: 20px;
+     background-color: #102a43;
+     padding: 15px;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+     color: #ccc;
+ }
+ 
+ .movie-actions {
+     display: flex;
+     justify-content: center;
+     gap: 10px;
+ }
+ 
+ .movie-actions button {
+     background-color: #f4c542;
+     border: none;
+     color: #000;
+     padding: 10px 15px;
+     font-size: 1rem;
+     cursor: pointer;
+     border-radius: 5px;
+     transition: background-color 0.3s;
+ }
+ 
+ .movie-actions button:hover {
+     background-color: #e5b336;
+     transform: scale(1.05);
+ }
+ 
